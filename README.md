@@ -17,6 +17,8 @@ Conecte o Claude à sua conta [LeadLovers](https://leadlovers.com) e trabalhe ne
 
 Você não precisa chamar as skills pelo nome: peça o que quer ("crie um e-mail de boas-vindas para o meu projeto do e-book") e o Claude escolhe a skill certa.
 
+Guia completo, com exemplos e perguntas frequentes: [Plugin leadlovers para o Claude](https://ajuda.leadlovers.com/integracoes/plugin-leadlovers-para-o-claude).
+
 ## Como instalar
 
 **Claude (web, desktop e Cowork):** em Customize > Plugins, adicione o marketplace `cloudleadlovers/leadlovers-plugin` e instale o plugin LeadLovers. Depois, na aba Connectors do plugin, conecte a LeadLovers.
@@ -36,9 +38,13 @@ Se você já adicionou o conector da LeadLovers à mão (com o endereço `https:
 
 O plugin não roda nenhum programa no seu computador. Ele tem só textos de instrução (as skills) e o endereço do conector remoto da LeadLovers, `https://mcp.leadlovers.com/mcp`. O conector age na conta que você autorizou, pela API da LeadLovers, e só quando o Claude usa uma das ferramentas dele. Para criar o design de um e-mail com IA ou buscar imagens, o conector usa serviços parceiros, listados na [política de privacidade](https://mcp.leadlovers.com/politica-de-privacidade).
 
+## Suporte
+
+Dúvidas ou problemas com o plugin: [suporte@leadlovers.com.br](mailto:suporte@leadlovers.com.br) ou [www.leadlovers.com/suporte](https://www.leadlovers.com/suporte).
+
 ## English
 
-The official LeadLovers plugin for Claude. It bundles the LeadLovers remote MCP connector (`https://mcp.leadlovers.com/mcp`, OAuth, no API key to copy) with six Brazilian Portuguese skills that walk non-technical LeadLovers customers from a request to a finished project, email, landing page, contact change or funnel. The skills ask only for what is missing, never ask for ids, and confirm before sending an email or changing many contacts. The plugin runs no local code. Privacy policy: <https://mcp.leadlovers.com/privacy-policy>.
+The official LeadLovers plugin for Claude. It bundles the LeadLovers remote MCP connector (`https://mcp.leadlovers.com/mcp`, OAuth, no API key to copy) with six Brazilian Portuguese skills that walk non-technical LeadLovers customers from a request to a finished project, email, landing page, contact change or funnel. The skills ask only for what is missing, never ask for ids, and confirm before sending an email or changing many contacts. The plugin runs no local code. Privacy policy: <https://mcp.leadlovers.com/privacy-policy>. Support: suporte@leadlovers.com.br.
 
 ## Para quem mantém este repositório
 
