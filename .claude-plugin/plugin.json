@@ -20,5 +20,7 @@
   ],
   "icon": "./logo.png",
   "documentationUrl": "https://ajuda.leadlovers.com/integracoes/plugin-leadlovers-para-o-claude",
-  "privacyPolicyUrl": "https://mcp.leadlovers.com/privacy-policy"
+  "supportUrl": "https://www.leadlovers.com/suporte",
+  "privacyPolicyUrl": "https://mcp.leadlovers.com/privacy-policy",
+  "termsOfServiceUrl": "https://www.leadlovers.com/termos-de-uso"
 }
