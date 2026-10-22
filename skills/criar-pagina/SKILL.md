@@ -26,6 +26,8 @@ Criar uma página dentro de um projeto, com o conteúdo aprovado pelo cliente e,
 
 Toda página pertence a um projeto, e quem preenche o formulário dela entra nesse projeto. Liste os projetos pelo nome com `get_machines` e pergunte em qual a página vai. Se a conta não tiver projeto, ofereça criar um com `criar-projeto`.
 
+Página de captura só em projeto de e-mail (tipo 1 no glossário): o formulário padrão pede o e-mail da pessoa. Se o cliente escolher um projeto de outro canal (WhatsApp, SMS e os demais), explique isso em uma frase e ofereça um projeto de e-mail no lugar.
+
 ## Passo 2, tipo
 
 Pergunte o tipo com as opções de `references/tipos-de-pagina.md`, em linguagem simples, recomendando "captura" quando o objetivo for juntar contatos.
@@ -40,7 +42,7 @@ Pergunte, uma coisa por vez e só o que faltar: o objetivo da página, a oferta 
 - HTML completo e responsivo, que funcione bem no celular, com o estilo no próprio HTML e sem script externo.
 - Imagens só quando o cliente pedir ou o tipo pedir (foto da oferta, capa do material), com `search_images`, usando a URL da imagem que a tool devolve.
 - Páginas de captura e de lançamento levam o formulário de captura padrão (veja "Formulário de captura padrão"). As demais só levam se o cliente pedir.
-- Nome no endereço (`name`): sugira um curto, só com letras sem acento, números e hífen ("curso-confeitaria", "ebook-receitas"). Ele faz parte do endereço público e precisa ser único no projeto: confira com `get_pages` (com o `machineId` do projeto) antes de criar. Se já existir, sugira outro ("curso-confeitaria-2").
+- Nome no endereço (`name`): sugira um curto, só com letras sem acento, números e hífen ("curso-confeitaria", "ebook-receitas"). Quando o cliente der um nome com acento, espaço ou maiúscula, diga em uma frase que o endereço não aceita esses caracteres e mostre a sugestão ("Promoção de Natal" fica "promocao-de-natal"). Ele faz parte do endereço público e precisa ser único no projeto: confira com `get_pages` (com o `machineId` do projeto) antes de criar. Se já existir, sugira outro ("curso-confeitaria-2").
 - Crie com `create_page`: `machineId`, `name`, `type` e `html`, sem `json` (a LeadLovers converte o HTML para o editor de páginas sozinha). Sem `html`, a página nasce como rascunho; faça isso só se o cliente quiser apenas reservar o nome.
 - `NAME_EXISTS` em `create_page`: o nome já é usado no projeto; sugira outro e confirme antes de tentar de novo.
 <!-- /funil -->

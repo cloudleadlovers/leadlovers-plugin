@@ -13,7 +13,7 @@ Fazer com os contatos o que o cliente pediu, nos contatos certos: encontrar pelo
 
 ## Quando não usar
 
-- Importar uma lista de contatos (colada ou planilha): por enquanto, oriente a importação pela tela de importação da LeadLovers.
+- Importar uma lista de contatos (colada ou planilha): por enquanto, oriente a importação pela tela de importação da LeadLovers. Não importe por aqui, nem com `preview_lead_import` e `import_leads`, nem cadastrando um a um: a importação por esta conversa ainda não foi liberada para todas as contas.
 - Enviar e-mail para um grupo de contatos: use `criar-email`.
 
 ## Como falar com o cliente
