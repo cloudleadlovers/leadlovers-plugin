@@ -1,0 +1,14 @@
+{
+  "name": "leadlovers",
+  "description": "Plugin oficial da LeadLovers para Claude.",
+  "owner": {
+    "name": "LeadLovers"
+  },
+  "plugins": [
+    {
+      "name": "leadlovers",
+      "source": "./",
+      "description": "Conector da LeadLovers e skills em português para criar projetos, e-mails, páginas, contatos e funis."
+    }
+  ]
+}
