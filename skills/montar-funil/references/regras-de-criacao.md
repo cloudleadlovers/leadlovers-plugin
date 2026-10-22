@@ -19,7 +19,7 @@ Cópia das regras de criar projeto, página e e-mail automático, para montar o 
 - HTML completo e responsivo, que funcione bem no celular, com o estilo no próprio HTML e sem script externo.
 - Imagens só quando o cliente pedir ou o tipo pedir (foto da oferta, capa do material), com `search_images`, usando a URL da imagem que a tool devolve.
 - Páginas de captura e de lançamento levam o formulário de captura padrão (veja "Formulário de captura padrão"). As demais só levam se o cliente pedir.
-- Nome no endereço (`name`): sugira um curto, só com letras sem acento, números e hífen ("curso-confeitaria", "ebook-receitas"). Ele faz parte do endereço público e precisa ser único no projeto: confira com `get_pages` (com o `machineId` do projeto) antes de criar. Se já existir, sugira outro ("curso-confeitaria-2").
+- Nome no endereço (`name`): sugira um curto, só com letras sem acento, números e hífen ("curso-confeitaria", "ebook-receitas"). Quando o cliente der um nome com acento, espaço ou maiúscula, diga em uma frase que o endereço não aceita esses caracteres e mostre a sugestão ("Promoção de Natal" fica "promocao-de-natal"). Ele faz parte do endereço público e precisa ser único no projeto: confira com `get_pages` (com o `machineId` do projeto) antes de criar. Se já existir, sugira outro ("curso-confeitaria-2").
 - Crie com `create_page`: `machineId`, `name`, `type` e `html`, sem `json` (a LeadLovers converte o HTML para o editor de páginas sozinha). Sem `html`, a página nasce como rascunho; faça isso só se o cliente quiser apenas reservar o nome.
 - `NAME_EXISTS` em `create_page`: o nome já é usado no projeto; sugira outro e confirme antes de tentar de novo.
 

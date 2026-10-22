@@ -26,11 +26,11 @@ Dar ao cliente um raio-x curto da conta e encaminhá-lo para a ação que resolv
 
 1. Chame `get_machines_structure`. Ela traz cada projeto com o tipo (número, veja o glossário), as sequências e os e-mails de cada sequência.
 2. Se o cliente perguntar por contatos, chame também `get_machines` com `includeLeadCount: true` para ter quantos contatos há em cada projeto. Um contato pode estar em vários projetos, então nunca some os números dos projetos como se fosse o total da conta.
-3. Resuma em até 6 linhas, por exemplo:
+3. Resuma em até 6 linhas no total, contando tudo o que vem antes da pergunta do passo 2, por exemplo:
 
    > Sua conta tem 4 projetos: 3 de e-mail e 1 de WhatsApp. O maior é "Curso de Confeitaria", com 2 sequências e 7 e-mails automáticos. "Lançamento Novembro" ainda não tem nenhum e-mail.
 
-   Com mais de 5 projetos, cite os 3 com mais e-mails e diga quantos outros existem. Não liste ids nem todos os níveis.
+   Com mais de 5 projetos, cite os 3 com mais e-mails e diga quantos outros existem. Não liste ids nem todos os níveis, e não acrescente observações ou alertas sobre os outros projetos: se o cliente quiser detalhes, ele pede.
 4. Explique só os termos que apareceram no resumo, numa frase cada (projeto, sequência, e-mail automático), usando o glossário.
 
 ## Passo 2, objetivo

@@ -62,7 +62,12 @@ Confirme em uma linha: "Vou criar o projeto de e-mail Curso de Confeitaria. Poss
 
 ## Sequência extra
 
-Só se o cliente pedir uma sequência além da inicial (por exemplo, uma para quem comprou). Explique em uma frase o que é uma sequência, pergunte o nome e chame `create_sequence` com o projeto e o nome. Nome repetido no mesmo projeto responde `NAME_EXISTS`: ofereça usar a existente.
+Só se o cliente pedir uma sequência além da inicial (por exemplo, uma para quem comprou). Antes de criar:
+
+1. Explique em uma frase o que é uma sequência (o caminho de e-mails automáticos que o contato percorre, em ordem).
+2. Pergunte o nome e espere a resposta. Pode sugerir um ("Compradores"), mas não crie com um nome que o cliente não aprovou.
+
+Só então chame `create_sequence` com o projeto e o nome. Nome repetido no mesmo projeto responde `NAME_EXISTS`: ofereça usar a existente.
 
 ## Erros
 
@@ -77,4 +82,4 @@ Diga o que a tool confirmou:
 - E-mail: "Criei o projeto de e-mail Curso de Confeitaria. Ele já vem com a Sequência Inicial e um primeiro e-mail ainda vazio, guardado sem enviar."
 - Outros canais: "Criei o projeto de WhatsApp Atendimento. Ele já vem com a Sequência Inicial."
 
-Termine oferecendo o próximo passo: escrever o primeiro e-mail (`criar-email`) ou criar a página de captura do projeto (`criar-pagina`).
+Termine oferecendo o próximo passo. Num projeto de e-mail: escrever o primeiro e-mail (`criar-email`) ou criar a página de captura do projeto (`criar-pagina`). Num projeto de outro canal, não ofereça página de captura nem e-mail: o formulário de captura padrão pede e-mail e o funil completo é montado por e-mail. Diga que a conexão do canal e as mensagens dele se configuram na LeadLovers.
