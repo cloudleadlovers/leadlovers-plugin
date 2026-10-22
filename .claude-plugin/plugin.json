@@ -1,7 +1,7 @@
 {
   "name": "leadlovers",
   "displayName": "LeadLovers",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Conecte o Claude à sua conta LeadLovers e crie projetos, e-mails, páginas de captura e funis conversando em português. As skills perguntam só o que falta, em linguagem simples, e confirmam antes de enviar ou mudar contatos.",
   "author": {
     "name": "LeadLovers",
@@ -19,5 +19,6 @@
     "landing-page"
   ],
   "icon": "./logo.png",
+  "documentationUrl": "https://ajuda.leadlovers.com/integracoes/plugin-leadlovers-para-o-claude",
   "privacyPolicyUrl": "https://mcp.leadlovers.com/privacy-policy"
 }

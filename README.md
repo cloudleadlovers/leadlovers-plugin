@@ -17,6 +17,8 @@ Conecte o Claude à sua conta [LeadLovers](https://leadlovers.com) e trabalhe ne
 
 Você não precisa chamar as skills pelo nome: peça o que quer ("crie um e-mail de boas-vindas para o meu projeto do e-book") e o Claude escolhe a skill certa.
 
+Guia completo, com exemplos e perguntas frequentes: [Plugin leadlovers para o Claude](https://ajuda.leadlovers.com/integracoes/plugin-leadlovers-para-o-claude).
+
 ## Como instalar
 
 **Claude (web, desktop e Cowork):** em Customize > Plugins, adicione o marketplace `cloudleadlovers/leadlovers-plugin` e instale o plugin LeadLovers. Depois, na aba Connectors do plugin, conecte a LeadLovers.
