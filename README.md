@@ -28,7 +28,7 @@ Você não precisa chamar as skills pelo nome: peça o que quer ("crie um e-mail
 /plugin install leadlovers@leadlovers
 ```
 
-Ao conectar, o Claude abre a LeadLovers no navegador para você entrar e autorizar o acesso. A conexão precisa ser feita pelo titular da conta, que precisa ter um Token Web API válido em [Preferências](https://app.leadlovers.com/Settings/Preferences); sub-usuários não conseguem conectar. Nenhuma chave de API é copiada nem gravada em arquivo, e a autorização pode ser revogada a qualquer momento no seu perfil da LeadLovers.
+Ao conectar, o Claude abre a LeadLovers no navegador para você entrar e autorizar o acesso. A conexão precisa ser feita pelo titular da conta, que precisa ter um Token Web API válido em [Preferências](https://app.leadlovers.com/Settings/Preferences); sub-usuários não conseguem conectar. Nenhuma chave de API é copiada nem gravada em arquivo. Para cortar o acesso, remova o plugin ou renove o Token Web API em Preferências, o que desliga na hora todas as conexões feitas com ele.
 
 Se você já adicionou o conector da LeadLovers à mão (com o endereço `https://mcp.leadlovers.com/mcp`), remova-o antes de instalar o plugin, para não ficar com duas conexões.
 
