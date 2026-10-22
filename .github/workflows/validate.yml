@@ -1,0 +1,22 @@
+name: Validate
+
+# Every change here, including the skills sync PRs opened from
+# cloudleadlovers/LeadLovers.Api.MCP, must still load as a plugin.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: claude plugin validate --strict
+        run: npx -y @anthropic-ai/claude-code@2.1.308 plugin validate --strict .
