@@ -43,7 +43,7 @@ Sugira a opção que o pedido indica ("boas-vindas", "depois que se cadastrar", 
 ## Passo 2, destino
 
 - **Tipo 1:** não há destino a escolher.
-- **Tipo 2:** chame `get_machines` e ofereça pelo nome os projetos de e-mail (tipo 1 na listagem). Um só: confirme que é ele. Nenhum: explique que a campanha do projeto precisa de um projeto de e-mail e ofereça criar um com `criar-projeto`.
+- **Tipo 2:** chame `get_machines` e ofereça pelo nome os projetos de e-mail (tipo 1 na listagem), fora os de automação (veja o glossário). Um só: confirme que é ele. Nenhum: explique que a campanha do projeto precisa de um projeto de e-mail e ofereça criar um com `criar-projeto`.
 - **Tipo 3:** escolha o projeto como no tipo 2, depois a sequência com `get_sequences` (se houver só uma, diga qual é e siga). Mostre os e-mails que a sequência já tem com `get_emails` (posição e assunto), para o cliente entender onde o novo vai entrar.
 
 <!-- funil -->
