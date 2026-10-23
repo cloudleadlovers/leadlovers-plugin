@@ -8,6 +8,7 @@ Use a primeira coluna com o cliente. A última é só para você: nunca mostre a
 | --- | --- | --- |
 | Projeto | Onde ficam os contatos, as sequências e as páginas de um objetivo (um curso, um e-book, um lançamento). "Máquina" é o nome antigo da mesma coisa: se o cliente disser máquina, entenda projeto e continue dizendo projeto. | `machine`, `machineId` |
 | Tipo de comunicação | Canal do projeto, escolhido na criação: e-mail, SMS, WhatsApp, Instagram, Telegram ou voz. | `type` de `create_machine`; nas listagens vem como número: 1 e-mail, 3 SMS, 5 WhatsApp, 6 Instagram, 7 Telegram, 8 voz |
+| Projeto de automação | Projeto do editor de automação antigo, que a LeadLovers descontinuou. Continua com os contatos dele e recebe contatos novos, mas sequência, e-mail e página novos nele só pelo editor de automação, no app. Não o ofereça como destino do que for criar; se o cliente pedir por ele, explique isso em uma frase e ofereça outro projeto. | `isAutomation: true` nas listagens de projeto; as tools de criação recusam com `AUTOMATION_MACHINE_NOT_SUPPORTED` |
 | Sequência | Caminho de mensagens que o contato percorre dentro do projeto, em ordem. Todo projeto novo já nasce com a "Sequência Inicial". | `sequence`, `sequenceId` |
 | Nível | Posição de uma mensagem na sequência: o nível 1 é a primeira. Contato no nível 3 está na terceira mensagem. | `level`: 1, 2, 3...; -1 deixa o contato no projeto sem começar a sequência |
 | Campanha para a conta toda | E-mail avulso para todos os contatos da conta. | broadcast geral: `type: broadcast` sem `machineId` |
