@@ -13,7 +13,7 @@ Dar ao cliente um raio-x curto da conta e encaminhá-lo para a ação que resolv
 
 ## Quando não usar
 
-- O cliente já pediu algo concreto: criar um projeto (`criar-projeto`), um e-mail ou campanha (`criar-email`), uma página (`criar-pagina`), ou encontrar, marcar ou mover contatos (`organizar-contatos`). Vá direto para a skill da tarefa.
+- O cliente já pediu algo concreto: criar um projeto (`criar-projeto`), um e-mail ou campanha (`criar-email`), uma página (`criar-pagina`), ou encontrar, importar, marcar ou mover contatos (`organizar-contatos`). Vá direto para a skill da tarefa.
 - O cliente quer o funil inteiro pronto (projeto, página e e-mails): use `montar-funil` quando ela estiver disponível.
 
 ## Como falar com o cliente
@@ -40,14 +40,14 @@ Pergunte o que o cliente quer fazer agora, com estas opções:
 1. Criar um projeto novo.
 2. Criar um e-mail ou uma campanha.
 3. Criar uma página (captura, obrigado, vendas, download).
-4. Organizar contatos: encontrar, marcar com tag, colocar num projeto.
+4. Organizar contatos: importar uma lista, encontrar, marcar com tag, colocar num projeto.
 5. Montar um funil completo: projeto, página de captura e e-mails de boas-vindas.
 
 Recomende uma pela situação:
 
 - Objetivo de negócio vago ("quero vender meu curso", "quero captar contatos"): recomende a 5.
 - Conta sem nenhum projeto: recomende a 5 e explique o caminho mínimo em uma frase: um projeto para guardar os contatos, uma página de captura para eles entrarem e um e-mail de boas-vindas que chega sozinho a quem se cadastrar.
-- Pedido sobre contatos que já existem: recomende a 4.
+- Pedido sobre contatos que já existem, ou uma lista para importar: recomende a 4.
 
 ## Passo 3, encaminhar
 

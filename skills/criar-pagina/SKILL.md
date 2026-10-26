@@ -24,7 +24,7 @@ Criar uma página dentro de um projeto, com o conteúdo aprovado pelo cliente e,
 
 ## Passo 1, projeto
 
-Toda página pertence a um projeto, e quem preenche o formulário dela entra nesse projeto. Liste os projetos pelo nome com `get_machines` e pergunte em qual a página vai. Se a conta não tiver projeto, ofereça criar um com `criar-projeto`.
+Toda página pertence a um projeto, e quem preenche o formulário dela entra nesse projeto. Liste os projetos pelo nome com `get_machines`, fora os de automação (veja o glossário), e pergunte em qual a página vai. Se a conta não tiver projeto, ofereça criar um com `criar-projeto`.
 
 Página de captura só em projeto de e-mail (tipo 1 no glossário): o formulário padrão pede o e-mail da pessoa. Se o cliente escolher um projeto de outro canal (WhatsApp, SMS e os demais), explique isso em uma frase e ofereça um projeto de e-mail no lugar.
 
