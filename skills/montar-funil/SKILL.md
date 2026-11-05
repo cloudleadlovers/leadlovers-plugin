@@ -33,11 +33,11 @@ No máximo 4 perguntas, uma por vez, pulando o que o cliente já disse:
 
 ## Passo 2, plano para aprovar
 
-Antes de qualquer chamada de escrita, chame `get_machines` para evitar nome de projeto repetido e apresente o plano em linguagem simples:
+Antes de qualquer chamada de escrita, chame `get_machines` e apresente o plano em linguagem simples. O nome do projeto no plano não pode ser igual ao de um projeto que já existe, porque a LeadLovers recusa (veja "Criar o projeto" em `references/regras-de-criacao.md`):
 
 > **Projeto de e-mail:** E-book Receitas Fit
-> **Página de captura:** ebook-receitas-fit, com título, benefícios e o formulário de nome e e-mail
 > **Página de obrigado:** obrigado-receitas-fit, dizendo que o e-book chegou por e-mail
+> **Página de captura:** ebook-receitas-fit, com título, benefícios e o formulário de nome e e-mail; quem se cadastra vai para a página de obrigado
 > **E-mails automáticos (Sequência Inicial):**
 > 1. Assim que a pessoa se cadastrar: "Seu e-book chegou", com o link de entrega
 > 2. 1 dia depois: uma receita do e-book e uma dica
@@ -52,12 +52,12 @@ Ajuste o plano até o cliente aprovar. Se ele escolher "ativos", mostre também 
 Siga `references/regras-de-criacao.md` em cada etapa. A ordem é fixa:
 
 1. **Projeto** de e-mail com `create_machine`. Guarde a "Sequência Inicial" (`sequenceId`) e o e-mail do nível 1 (`emailId`). Não crie sequência nem outro e-mail de nível 1.
-2. **Página de captura** com `create_page` (tipo `capture`, com o formulário padrão) no projeto criado.
-3. **Página de obrigado** com `create_page` (tipo `next-steps`) no mesmo projeto.
+2. **Página de obrigado** com `create_page` (tipo `next-steps`) no projeto criado. Guarde a `url` da resposta.
+3. **Página de captura** com `create_page` (tipo `capture`, com o formulário padrão) no mesmo projeto, com essa `url` em `nextUrl` e `existsUrl`, para quem se cadastrar ir para a página de obrigado.
 4. **Primeiro e-mail:** preencha o nível 1 com `update_email` (`id` do `emailId`, `subject`, `body` e `enabled` conforme a escolha do passo 2).
 5. **Demais e-mails**, na ordem, com `create_email` (`type: sequence`, projeto, "Sequência Inicial", `subject`, `body`, `enabled` da mesma escolha e o intervalo em `settings.sequence`).
 
-Escreva cada página e cada e-mail a partir da entrevista, em português simples, com o nome do contato (`*|NOME|*`) na saudação dos e-mails e sem campos personalizados.
+Escreva cada página e cada e-mail a partir da entrevista, em português simples, com o nome do contato (`*|NOME|*`) na saudação dos e-mails e sem campos personalizados. Cada página leva `title` e `description` de busca. O HTML segue "Montar a página" e "Montar o HTML do e-mail", em `references/regras-de-criacao.md`.
 
 Se uma etapa falhar, pare, diga o que já foi criado e o que falhou, e ofereça continuar dali. Nunca recrie o que já existe: reaproveite o projeto, as páginas e os e-mails já criados.
 
@@ -66,13 +66,17 @@ Se uma etapa falhar, pare, diga o que já foi criado e o que falhou, e ofereça 
 Liste o que foi criado e o estado de envio de cada e-mail, como a resposta das tools confirmou:
 
 > Criei o projeto E-book Receitas Fit com:
-> - a página de captura ebook-receitas-fit e a página de obrigado obrigado-receitas-fit;
+> - a página de captura ebook-receitas-fit, no endereço <endereço>, que leva quem se cadastra à página de obrigado obrigado-receitas-fit;
 > - 3 e-mails automáticos na Sequência Inicial, salvos, sem enviar.
+
+Mostre o endereço de cada página como a resposta trouxe (`url`); nunca monte um.
+
+Se as páginas ou os e-mails vieram com o link do editor (`editorUrl`), ofereça abrir cada um no editor para ajustar textos e imagens, com o link como veio.
 
 Termine com o que o cliente ainda faz na LeadLovers:
 
-- conferir a publicação e o endereço das páginas;
-- configurar, na página de captura, o envio para a página de obrigado depois do cadastro, que não é feito por aqui;
+- abrir as páginas pelo endereço e conferir como ficaram;
+- só se a página de obrigado veio sem endereço: configurar, na página de captura, o envio para ela depois do cadastro;
 - revisar os e-mails e ativá-los quando aprovar (ou pedir "ative os e-mails do projeto E-book Receitas Fit");
 - conferir se o projeto está ativo para receber contatos.
 

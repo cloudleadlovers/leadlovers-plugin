@@ -43,7 +43,7 @@ Sugira a opção que o pedido indica ("boas-vindas", "depois que se cadastrar", 
 ## Passo 2, destino
 
 - **Tipo 1:** não há destino a escolher.
-- **Tipo 2:** chame `get_machines` e ofereça pelo nome os projetos de e-mail (tipo 1 na listagem). Um só: confirme que é ele. Nenhum: explique que a campanha do projeto precisa de um projeto de e-mail e ofereça criar um com `criar-projeto`.
+- **Tipo 2:** chame `get_machines` e ofereça pelo nome os projetos de e-mail (tipo 1 na listagem), fora os de automação (veja o glossário). Um só: confirme que é ele. Nenhum: explique que a campanha do projeto precisa de um projeto de e-mail e ofereça criar um com `criar-projeto`.
 - **Tipo 3:** escolha o projeto como no tipo 2, depois a sequência com `get_sequences` (se houver só uma, diga qual é e siga). Mostre os e-mails que a sequência já tem com `get_emails` (posição e assunto), para o cliente entender onde o novo vai entrar.
 
 <!-- funil -->
@@ -57,8 +57,21 @@ Sugira a opção que o pedido indica ("boas-vindas", "depois que se cadastrar", 
 
 Pergunte como o cliente prefere:
 
-1. **Ele traz o texto** (ou a ideia em poucas linhas): monte o assunto e um HTML simples e limpo (título, parágrafos, um botão se houver link). Mostre o assunto e o texto como o contato vai ler, nunca o código, e ajuste até ele aprovar.
+1. **Ele traz o texto** (ou a ideia em poucas linhas): monte o assunto e o HTML (título, parágrafos, um botão se houver link) como em "Montar o HTML do e-mail", logo abaixo. Mostre o assunto e o texto como o contato vai ler, nunca o código, e ajuste até ele aprovar. A aprovação precisa ser do texto: se a resposta falar de outra coisa (por exemplo, "apenas salvar"), anote e pergunte de novo se o texto está aprovado. O e-mail leva exatamente o texto aprovado; qualquer mudança depois disso, até de grafia, volta para o cliente antes de criar.
 2. **Design com IA**: um e-mail com layout visual. Siga `references/conteudo-com-ia.md`.
+
+<!-- funil -->
+### Montar o HTML do e-mail
+
+Escreva o `body` no formato que o editor visual da LeadLovers entende, para o cliente poder ajustar depois com um clique e o e-mail abrir bem em qualquer caixa de entrada. Vale para `create_email` e para o `update_email` que preenche o nível 1:
+
+- uma tabela de 600px de largura, centralizada, com uma linha (`<tr>`) por seção (topo, título, texto, botão, rodapé);
+- todo o estilo inline, em cada elemento, sem `<style>`, e nenhum `<script>`;
+- só fontes seguras: Arial, Georgia, Verdana, Trebuchet MS, Tahoma ou Times New Roman;
+- toda imagem com `alt` que descreve a imagem.
+
+Não envie `editor`: a LeadLovers escolhe o editor do e-mail.
+<!-- /funil -->
 
 Para o nome do contato, use a tag `*|NOME|*` no texto ("Oi, *|NOME|*!"); `*|EMAIL|*` e `*|TELEFONE|*` também são preenchidas pela LeadLovers. Evite tags de campo personalizado: elas impedem deixar o e-mail ativo (veja `references/estado-de-envio.md`). Imagens só quando o cliente pedir, com `search_images`.
 
@@ -94,6 +107,7 @@ Para a conta toda, repita o número de contatos na pergunta final ("Posso criar 
 
 - Tipos 1 e 2: `create_email` com `type: broadcast`, `subject`, `body`, `enabled` conforme o passo 4 (no tipo 2, sempre `false`), no tipo 2 `machineId` e, se o cliente pediu para agendar, `settings.broadcast.sendAt` com a data e a hora no fuso `-03:00`.
 - Tipo 3: `create_email` com `type: sequence`, `machineId`, `sequenceId`, `subject`, `body`, `enabled` conforme o passo 4 e `settings.sequence` do passo 2. Ou `update_email` no nível 1 de projeto novo, como descrito no passo 2.
+- Não envie `editor`: a LeadLovers escolhe o editor do e-mail.
 - Design com IA: envie também `json` (veja `references/conteudo-com-ia.md`).
 
 ## Resultado
@@ -107,12 +121,14 @@ Diga o que a resposta da tool confirmou, nunca o que foi pedido. Leia o `enabled
 - "Criei a campanha desativada. Para enviar, ative na tela Campanhas, aba Agendadas, da LeadLovers."
 - "Criei a campanha para sexta, 23/10, às 9h, mas desativada: ela só sai depois que você ativar na tela Campanhas, aba Agendadas, da LeadLovers."
 
+Se a resposta trouxer o link do editor (`editorUrl`), ofereça em seguida: "Quer ajustar textos e imagens você mesmo? Abra no editor: <link>", com o link como veio. Sem ele, não fale do editor.
+
 ## Ajustar, ativar ou pausar depois
 
-1. Encontre o e-mail pelo que o cliente diz (projeto, sequência, posição ou assunto) com `get_machines`, `get_sequences` e `get_emails`, e leia-o com `get_email`. Confirme com o cliente qual é ("o e-mail Boas-vindas, primeiro da Sequência Inicial do projeto Curso de Confeitaria").
+1. Encontre o e-mail pelo que o cliente diz (projeto, sequência, posição ou assunto) com `get_machines`, `get_sequences` e `get_emails`, e leia-o com `get_email`, que traz também o `hash` do HTML. Confirme com o cliente qual é ("o e-mail Boas-vindas, primeiro da Sequência Inicial do projeto Curso de Confeitaria").
 2. Envie em `update_email` só o que muda:
    - assunto: `subject`;
-   - conteúdo: `body` inteiro, partindo do HTML que `get_email` trouxe, com só o trecho pedido alterado e as tags `*|...|*`, links e imagens intactos;
+   - conteúdo: `body` inteiro, partindo do HTML que `get_email` trouxe, com só o trecho pedido alterado e as tags `*|...|*`, links e imagens intactos, mais `baseHash` com o `hash` que `get_email` trouxe (ou o da última gravação), para não apagar uma mudança que o cliente fez no editor enquanto isso;
    - ativar ou pausar (só e-mail automático): `enabled: true` ou `false`.
 3. Ativar ou pausar passa pela mesma confirmação do passo 5. Se o e-mail já está ativo e o conteúdo vai mudar, avise que a mudança vale para os próximos envios.
 4. Campanha já enviada (`EMAIL_ALREADY_SENT`) ou agendada (`EMAIL_SCHEDULED`) não pode ser editada: explique e não insista. Para corrigir uma campanha enviada, ofereça criar outra. Ativar ou pausar campanha é feito na tela Campanhas da LeadLovers.
@@ -135,6 +151,7 @@ Traduza e dê o próximo passo; nunca crie outro e-mail no lugar de um recusado.
 | `EMAIL_BODY_REQUIRED` | E-mail sem conteúdo não pode ser ativado; escreva o conteúdo antes |
 | `EMAIL_CUSTOM_FIELD_NOT_SUPPORTED` | O conteúdo usa campo personalizado que o envio automático não preenche; ofereça tirar o campo ou salvar e incluí-lo no editor da LeadLovers |
 | `EMAIL_VARIANT_NOT_SUPPORTED` | O e-mail tem teste A/B ou reenvio e só pode ser editado no editor da LeadLovers |
+| `CONTENT_CHANGED` | Nada foi gravado: "O e-mail mudou desde que eu li; posso ler de novo antes de alterar?". Com o sim, leia de novo com `get_email`, refaça a mudança sobre o HTML novo e grave com o `hash` novo; nunca grave sem `baseHash` para forçar |
 | Sessão do design com IA expirada | O rascunho vale por 1 hora; ofereça criar o design de novo |
 | Conexão sem permissão de escrita | A conexão só permite consultar; reconecte a LeadLovers no assistente e aprove o acesso completo |
 | LeadLovers recusou a conexão (401) | A conexão expirou ou foi revogada; reconecte a LeadLovers no assistente |
