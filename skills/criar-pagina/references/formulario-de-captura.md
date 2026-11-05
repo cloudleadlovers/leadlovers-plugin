@@ -16,6 +16,7 @@ A página sempre pertence a um projeto, e os contatos enviados pelo formulário 
 
 - `email` é obrigatório e `name` é recomendado. Os textos (placeholder, botão) e o estilo podem mudar; o `action`, o `method` e os nomes dos campos não.
 - Telefone e campos personalizados ficam fora por enquanto: não acrescente outros campos ao formulário, mesmo que o cliente peça; diga que, por ora, a página capta nome e e-mail.
+- O formulário fica dentro de uma das seções da página, sem `<script>` junto.
 - Ao editar uma página que já tem esse formulário, preserve-o.
 <!-- /funil -->
 

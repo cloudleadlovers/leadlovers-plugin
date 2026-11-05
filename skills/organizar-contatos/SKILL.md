@@ -1,6 +1,6 @@
 ---
 name: organizar-contatos
-description: Encontra, marca, move e ajusta contatos (leads) na LeadLovers com o cliente, com confirmação antes de mudar muitos de uma vez. Use quando o cliente quiser achar contatos, saber quantos têm uma característica, marcar ou etiquetar com tag, tirar uma tag, colocar contatos num projeto ou numa sequência, tirar de um projeto, cadastrar ou corrigir um contato, ou criar e preencher campos personalizados. Traduz o critério do cliente (quem comprou, quem se cadastrou em outubro, quem não tem tag) num filtro, mostra o total e alguns exemplos, confirma, executa em lotes e acompanha até o fim.
+description: Encontra, importa, marca, move e ajusta contatos (leads) na LeadLovers com o cliente, com confirmação antes de mudar muitos de uma vez. Use quando o cliente quiser achar contatos, saber quantos têm uma característica, importar uma lista de contatos colada, uma planilha ou um CSV, marcar ou etiquetar com tag, tirar uma tag, colocar contatos num projeto ou numa sequência, tirar de um projeto, cadastrar ou corrigir um contato, ou criar e preencher campos personalizados. Traduz o critério do cliente (quem comprou, quem se cadastrou em outubro, quem não tem tag) num filtro, mostra o total e alguns exemplos, confirma, executa em lotes e acompanha até o fim.
 metadata:
   version: "1.0"
 ---
@@ -13,7 +13,6 @@ Fazer com os contatos o que o cliente pediu, nos contatos certos: encontrar pelo
 
 ## Quando não usar
 
-- Importar uma lista de contatos (colada ou planilha): por enquanto, oriente a importação pela tela de importação da LeadLovers. Não importe por aqui, nem com `preview_lead_import` e `import_leads`, nem cadastrando um a um: a importação por esta conversa ainda não foi liberada para todas as contas.
 - Enviar e-mail para um grupo de contatos: use `criar-email`.
 
 ## Como falar com o cliente
@@ -30,6 +29,10 @@ Fazer com os contatos o que o cliente pediu, nos contatos certos: encontrar pelo
 
 O id de cada contato é o campo `id` do registro de `get_leads`; é ele que as outras tools recebem.
 
+## Importar uma lista
+
+Lista de contatos colada, CSV ou planilha: siga `references/importacao.md` do começo ao fim. Nunca cadastre uma lista um a um com `create_lead`.
+
 ## Mudar muitos contatos de uma vez
 
 Valem para marcar com tag (`add_tags_to_leads`), tirar tag (`remove_tags_from_leads`), colocar num projeto (`add_leads_to_machine`) e tirar de projeto ou excluir (`delete_lead`).
@@ -43,7 +46,7 @@ Valem para marcar com tag (`add_tags_to_leads`), tirar tag (`remove_tags_from_le
 ## Tags
 
 - Chame `get_tags` antes. Se o nome pedido parecer com uma tag existente (maiúsculas, plural, acento: "Comprou" e "compraram"), ofereça a existente.
-- Tag nova só com o aceite do cliente. `add_tags_to_leads` e `create_lead` criam sozinhas a tag que recebem pelo nome, então confira o nome antes de passar.
+- Tag nova só com o aceite do cliente. `add_tags_to_leads` e `create_lead` criam sozinhas a tag que recebem pelo nome, então confira o nome antes de passar. Na importação, a coluna de tags também cria as que faltam (`references/importacao.md`).
 - Criar uma tag vazia, sem aplicar a ninguém: `create_tag`. Nome igual a uma existente (ignorando maiúsculas) responde `NAME_EXISTS`.
 - Renomear ou excluir tag não é possível por aqui; diga que isso é feito na LeadLovers.
 
@@ -79,10 +82,11 @@ Confirme dizendo o efeito e o total, e acompanhe como nas mudanças em massa.
 
 ## Pontuação
 
-A pontuação aparece nos filtros, mas não é definida por aqui; diga que ajustes de pontuação são feitos na LeadLovers.
+A pontuação aparece nos filtros e pode vir numa coluna da importação (`references/importacao.md`). Fora isso, não é definida por aqui; diga que ajustes de pontuação são feitos na LeadLovers.
 
 ## Erros
 
+- Erros da importação: `references/importacao.md`, passos 7 a 9 e "Regras da LeadLovers".
 - `LEAD_NOT_FOUND`: o contato foi excluído ou não é desta conta; busque de novo.
 - `TAG_NOT_FOUND`, `MACHINE_NOT_FOUND`, `SEQUENCE_NOT_FOUND`: a tag, o projeto ou a sequência não existe mais; liste de novo e pergunte.
 - Conexão sem permissão de escrita: a conexão só permite consultar; reconecte a LeadLovers no assistente e aprove o acesso completo.

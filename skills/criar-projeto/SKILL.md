@@ -44,6 +44,8 @@ Antes de criar, chame `get_machines` e compare o nome com os projetos existentes
 1. Usar o projeto que já existe (recomendado quando o objetivo é o mesmo).
 2. Criar com outro nome.
 
+A LeadLovers não aceita dois projetos com o mesmo nome. Se o cliente insistir num nome que já existe, explique isso e repita as duas opções; nunca ofereça criar com o nome repetido.
+
 ## Passo 3, confirmar e criar
 
 Confirme em uma linha: "Vou criar o projeto de e-mail Curso de Confeitaria. Posso criar?". Não existe forma de excluir um projeto por aqui, então espere o "sim".
@@ -51,6 +53,7 @@ Confirme em uma linha: "Vou criar o projeto de e-mail Curso de Confeitaria. Poss
 <!-- funil -->
 ### Criar o projeto
 
+- O nome não pode repetir o de um projeto da conta: a LeadLovers recusa com `NAME_EXISTS`. Confira com `get_machines` antes de propor o nome. Se o cliente insistir num nome que já existe, explique que não dá e ofereça usar o projeto existente ou outro nome; nunca ofereça criar com o nome repetido nem chame `create_machine` com ele.
 - Chame `create_machine` com `name` e `type` (`email`, `sms`, `whatsapp`, `instagram`, `telegram` ou `voice`).
 - Resposta com `sequenceId`: o projeto já veio com a sequência "Sequência Inicial". Num projeto de e-mail, `emailId` é o e-mail do nível 1 dessa sequência, ainda sem conteúdo e salvo, sem enviar. Guarde os dois ids.
 - Nunca chame `create_sequence` com o nome "Sequência Inicial": a sequência já existe e a resposta seria `NAME_EXISTS`.

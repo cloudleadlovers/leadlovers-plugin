@@ -35,14 +35,14 @@ Cada pedido de mudança ("troque a cor do botão", "coloque o nome da empresa") 
 
 ## 5. Finalizar e gravar
 
-1. `finalize_email_template` com o `sessionId`. A resposta traz `fullJson`, o design no formato do editor visual da LeadLovers.
-2. No `create_email`, envie `body` com o `htmlPreview` da última versão aprovada e `json` com o `fullJson` como texto. Não envie `editor`: com `json`, o e-mail já abre no editor visual.
+1. `finalize_email_template` com o `sessionId`. A resposta traz `fullJson`, o design no formato do editor de arrastar e soltar da LeadLovers.
+2. No `create_email`, envie `body` com o `htmlPreview` da última versão aprovada e `json` com o `fullJson` como texto. Não envie `editor`: com `json`, o e-mail já abre no editor de arrastar e soltar, com o design pronto.
 
 O rascunho vale por 1 hora. Se a tool disser que a sessão expirou ou não foi encontrada, explique e ofereça criar o design de novo.
 
 ## Nível 1 de projeto novo
 
-O e-mail do nível 1 que vem com o projeto é preenchido com `update_email`, que recebe o HTML (`body`) mas não o design (`json`). O design entra pronto, mas esse e-mail continua no editor de HTML da LeadLovers, sem o editor visual. Avise o cliente antes, porque mudanças futuras feitas por ele na tela serão no HTML.
+O e-mail do nível 1 que vem com o projeto é preenchido com `update_email`, que recebe o HTML (`body`) mas não o design (`json`). O design entra pronto, mas esse e-mail continua no editor de HTML da LeadLovers, sem o editor de arrastar e soltar. Avise o cliente antes, porque mudanças futuras feitas por ele na tela serão no HTML.
 
 ## E-mail que já existe
 
