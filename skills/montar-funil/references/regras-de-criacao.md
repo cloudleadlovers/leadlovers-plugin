@@ -15,6 +15,15 @@ Cópia das regras de criar projeto, página e e-mail automático, para montar o 
 - Resposta sem `sequenceId`: crie a sequência com `create_sequence`, nome "Sequência Inicial".
 - `NAME_EXISTS` em `create_machine`: já existe um projeto com esse nome. Ofereça usar o existente ou escolher outro nome; não repita a chamada com o mesmo nome.
 
+### Ícone das páginas
+
+- O ícone da aba do navegador é um por projeto e vale para todas as páginas dele (veja "Ícone das páginas" no glossário). Num projeto de e-mail, depois de criar o projeto, ofereça uma vez: "Quer que as páginas desse projeto mostrem o ícone da sua marca na aba do navegador?", com as opções: o ícone do site do cliente, o logo dele, ou deixar sem ícone por enquanto.
+- Precisa de um endereço `https://` de uma imagem PNG, JPG, WEBP, GIF ou ICO. Se o cliente tiver um site e você conseguir ler o site, prefira o ícone que ele declara para celular (`apple-touch-icon`) ou o maior PNG quadrado, e não o `favicon.ico`. Senão, peça o endereço da imagem do logo ou do ícone. Nunca invente um endereço.
+- Logo em SVG não serve: peça a versão em PNG.
+- Com o "sim", chame `set_machine_favicon` com o projeto e o endereço. A LeadLovers reduz para um ícone quadrado pequeno; diga isso se o logo for largo, porque ele aparece inteiro e bem pequeno.
+- Nunca coloque o ícone no HTML de uma página (`<link rel="icon">`): ele já sai do projeto para todas as páginas.
+- Recusas de `set_machine_favicon` (`FAVICON_UNSUPPORTED_TYPE`, `FAVICON_URL_NOT_ALLOWED`, `FAVICON_DOWNLOAD_FAILED`, `FAVICON_TOO_LARGE`, `FAVICON_CORRUPTED`): o projeto fica com o ícone que tinha. Explique em uma frase e peça outra imagem; não tente de novo com o mesmo endereço.
+
 ### Montar a página
 
 - HTML completo e responsivo, que funcione bem no celular, escrito para o editor visual da LeadLovers, onde o cliente muda textos, cores e fontes com um clique:
@@ -22,6 +31,7 @@ Cópia das regras de criar projeto, página e e-mail automático, para montar o 
   - cada seção é uma `<section>` (ou `<header>` e `<footer>`) filha direta do `<body>`, sem um contêiner em volta de todas;
   - `<head>` sem atributos, sempre escrito assim, porque a LeadLovers coloca o SEO e os scripts da página procurando esse texto exato; o idioma vai em `<html lang="pt-BR">`;
   - estilo num `<style>` dentro do `<head>`, fontes do Google por `<link>` e nenhum `<script>`;
+  - nenhum `<link rel="icon">` (nem `shortcut icon` ou `apple-touch-icon`): o ícone da aba é o do projeto, e a LeadLovers coloca em todas as páginas dele;
   - toda imagem com `alt` que descreve a imagem.
 - Imagens só quando o cliente pedir ou o tipo pedir (foto da oferta, capa do material), com `search_images`, usando a URL da imagem que a tool devolve.
 - Páginas de captura e de lançamento levam o formulário de captura padrão (veja "Formulário de captura padrão"). As demais só levam se o cliente pedir.
@@ -51,14 +61,17 @@ A página sempre pertence a um projeto, e os contatos enviados pelo formulário 
 
 ### E-mail automático: intervalo e nível 1
 
-- **Intervalo.** Pergunte quanto tempo depois do e-mail anterior o novo deve sair, em dias, horas e minutos. Sugira 1 dia; para o primeiro e-mail de boas-vindas, sugira "assim que o contato entrar" (zero). Envie em `settings.sequence` com `sendAfter` (`days`, `hours`, `minutes`), `startTime: "00:00"` e `endTime: "23:59"`. Janela de horário (por exemplo, só das 8h às 18h) e dias da semana (`weekdays`, 1 = segunda a 7 = domingo) só se o cliente pedir.
-- **Nível 1 de projeto novo.** Se a sequência tem só o e-mail do nível 1 que veio com o projeto (o `emailId` que `create_machine` devolveu, ou um nível 1 que `get_email` mostra sem conteúdo), o primeiro e-mail automático **preenche esse nível** com `update_email` (`id` desse e-mail, `subject`, `body` e `enabled` conforme o estado de envio) em vez de criar outro. Criar um novo faria dele o nível 2, e os contatos ficariam parados no nível 1, que está sem enviar. Nesse caso o intervalo fica como veio do projeto, porque `update_email` não muda intervalo; se o cliente quiser outro, explique que isso é ajustado na LeadLovers.
+- **Intervalo.** O intervalo conta a partir do e-mail anterior da sequência (de quando o contato chegou ao nível), não da entrada do contato. Combine com o cliente o dia da sequência em que o e-mail sai, contado da entrada (dia 0), e calcule `sendAfter.days` como esse dia menos o dia do e-mail anterior, que vem em `sequenceDay` no `get_emails` (dia 5 depois de um no dia 2 dá 3, nunca 5). Para o primeiro e-mail de boas-vindas, sugira "assim que o contato entrar" (dia 0). Envie em `settings.sequence` com `sendAfter` (`days`, `hours`, `minutes`), `startTime: "00:00"` e `endTime: "23:59"`. Janela de horário (por exemplo, só das 8h às 18h) e dias da semana (`weekdays`, 1 = segunda a 7 = domingo) só se o cliente pedir.
+- **Vários e-mails de uma vez.** Antes de gravar, confirme com o cliente uma tabela com nível, dia da sequência e intervalo desde o anterior (ex.: nível 2, dia 3, 3 dias depois do anterior; nível 3, dia 6, 3 dias depois). Os dias crescem, e cada intervalo é a diferença para a linha de cima.
+- **Nível 1 de projeto novo.** Se a sequência tem só o e-mail do nível 1 que veio com o projeto (o `emailId` que `create_machine` devolveu, ou um nível 1 que `get_email` mostra sem conteúdo), o primeiro e-mail automático **preenche esse nível** com `update_email` (`id` desse e-mail, `subject`, `body` e `enabled` conforme o estado de envio) em vez de criar outro. Criar um novo faria dele o nível 2, e os contatos ficariam parados no nível 1, que está sem enviar. O nível 1 sai na entrada do contato (intervalo zero); se o cliente quiser outro, mande junto `sequence.sendAfter` no mesmo `update_email`.
 
 ### Montar o HTML do e-mail
 
 Escreva o `body` no formato que o editor visual da LeadLovers entende, para o cliente poder ajustar depois com um clique e o e-mail abrir bem em qualquer caixa de entrada. Vale para `create_email` e para o `update_email` que preenche o nível 1:
 
-- uma tabela de 600px de largura, centralizada, com uma linha (`<tr>`) por seção (topo, título, texto, botão, rodapé);
+- uma tabela principal centralizada, com uma linha (`<tr>`) por seção (topo, título, texto, botão, rodapé), com `width="600"` e `style="width:100%;max-width:600px"`. Nunca `width:600px` no estilo: no celular o e-mail estoura a tela e rola para o lado;
+- em volta dela, uma tabela só do Outlook, que não lê `max-width`: `<!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->` antes e `<!--[if mso]></td></tr></table><![endif]-->` depois;
+- imagem que ocupa a largura com `width` no atributo e `width:100%;height:auto` no estilo;
 - todo o estilo inline, em cada elemento, sem `<style>`, e nenhum `<script>`;
 - só fontes seguras: Arial, Georgia, Verdana, Trebuchet MS, Tahoma ou Times New Roman;
 - toda imagem com `alt` que descreve a imagem.
