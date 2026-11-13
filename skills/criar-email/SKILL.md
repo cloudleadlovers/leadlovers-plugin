@@ -22,6 +22,7 @@ Isso vale mesmo quando o pedido parece completo ("mande agora uma campanha para 
 - Mudar, ativar ou pausar um e-mail que já existe: siga a seção "Ajustar, ativar ou pausar depois", no fim. Nunca use `create_email` para isso, porque ele cria outro e-mail.
 - O cliente quer o funil inteiro (projeto, página e e-mails): use `montar-funil` quando ela estiver disponível.
 - Página de captura ou de vendas: use `criar-pagina`.
+- Mensagem ou disparo de WhatsApp, num projeto de WhatsApp: use `criar-mensagem-whatsapp`.
 
 ## Como falar com o cliente
 
@@ -49,8 +50,9 @@ Sugira a opção que o pedido indica ("boas-vindas", "depois que se cadastrar", 
 <!-- funil -->
 ### E-mail automático: intervalo e nível 1
 
-- **Intervalo.** Pergunte quanto tempo depois do e-mail anterior o novo deve sair, em dias, horas e minutos. Sugira 1 dia; para o primeiro e-mail de boas-vindas, sugira "assim que o contato entrar" (zero). Envie em `settings.sequence` com `sendAfter` (`days`, `hours`, `minutes`), `startTime: "00:00"` e `endTime: "23:59"`. Janela de horário (por exemplo, só das 8h às 18h) e dias da semana (`weekdays`, 1 = segunda a 7 = domingo) só se o cliente pedir.
-- **Nível 1 de projeto novo.** Se a sequência tem só o e-mail do nível 1 que veio com o projeto (o `emailId` que `create_machine` devolveu, ou um nível 1 que `get_email` mostra sem conteúdo), o primeiro e-mail automático **preenche esse nível** com `update_email` (`id` desse e-mail, `subject`, `body` e `enabled` conforme o estado de envio) em vez de criar outro. Criar um novo faria dele o nível 2, e os contatos ficariam parados no nível 1, que está sem enviar. Nesse caso o intervalo fica como veio do projeto, porque `update_email` não muda intervalo; se o cliente quiser outro, explique que isso é ajustado na LeadLovers.
+- **Intervalo.** O intervalo conta a partir do e-mail anterior da sequência (de quando o contato chegou ao nível), não da entrada do contato. Combine com o cliente o dia da sequência em que o e-mail sai, contado da entrada (dia 0), e calcule `sendAfter.days` como esse dia menos o dia do e-mail anterior, que vem em `sequenceDay` no `get_emails` (dia 5 depois de um no dia 2 dá 3, nunca 5). Para o primeiro e-mail de boas-vindas, sugira "assim que o contato entrar" (dia 0). Envie em `settings.sequence` com `sendAfter` (`days`, `hours`, `minutes`), `startTime: "00:00"` e `endTime: "23:59"`. Janela de horário (por exemplo, só das 8h às 18h) e dias da semana (`weekdays`, 1 = segunda a 7 = domingo) só se o cliente pedir.
+- **Vários e-mails de uma vez.** Antes de gravar, confirme com o cliente uma tabela com nível, dia da sequência e intervalo desde o anterior (ex.: nível 2, dia 3, 3 dias depois do anterior; nível 3, dia 6, 3 dias depois). Os dias crescem, e cada intervalo é a diferença para a linha de cima.
+- **Nível 1 de projeto novo.** Se a sequência tem só o e-mail do nível 1 que veio com o projeto (o `emailId` que `create_machine` devolveu, ou um nível 1 que `get_email` mostra sem conteúdo), o primeiro e-mail automático **preenche esse nível** com `update_email` (`id` desse e-mail, `subject`, `body` e `enabled` conforme o estado de envio) em vez de criar outro. Criar um novo faria dele o nível 2, e os contatos ficariam parados no nível 1, que está sem enviar. O nível 1 sai na entrada do contato (intervalo zero); se o cliente quiser outro, mande junto `sequence.sendAfter` no mesmo `update_email`.
 <!-- /funil -->
 
 ## Passo 3, conteúdo
@@ -65,7 +67,9 @@ Pergunte como o cliente prefere:
 
 Escreva o `body` no formato que o editor visual da LeadLovers entende, para o cliente poder ajustar depois com um clique e o e-mail abrir bem em qualquer caixa de entrada. Vale para `create_email` e para o `update_email` que preenche o nível 1:
 
-- uma tabela de 600px de largura, centralizada, com uma linha (`<tr>`) por seção (topo, título, texto, botão, rodapé);
+- uma tabela principal centralizada, com uma linha (`<tr>`) por seção (topo, título, texto, botão, rodapé), com `width="600"` e `style="width:100%;max-width:600px"`. Nunca `width:600px` no estilo: no celular o e-mail estoura a tela e rola para o lado;
+- em volta dela, uma tabela só do Outlook, que não lê `max-width`: `<!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->` antes e `<!--[if mso]></td></tr></table><![endif]-->` depois;
+- imagem que ocupa a largura com `width` no atributo e `width:100%;height:auto` no estilo;
 - todo o estilo inline, em cada elemento, sem `<style>`, e nenhum `<script>`;
 - só fontes seguras: Arial, Georgia, Verdana, Trebuchet MS, Tahoma ou Times New Roman;
 - toda imagem com `alt` que descreve a imagem.
@@ -129,10 +133,11 @@ Se a resposta trouxer o link do editor (`editorUrl`), ofereça em seguida: "Quer
 2. Envie em `update_email` só o que muda:
    - assunto: `subject`;
    - conteúdo: `body` inteiro, partindo do HTML que `get_email` trouxe, com só o trecho pedido alterado e as tags `*|...|*`, links e imagens intactos, mais `baseHash` com o `hash` que `get_email` trouxe (ou o da última gravação), para não apagar uma mudança que o cliente fez no editor enquanto isso;
-   - ativar ou pausar (só e-mail automático): `enabled: true` ou `false`.
+   - ativar ou pausar (só e-mail automático): `enabled: true` ou `false`;
+   - intervalo, data fixa, janela ou dias da semana (só e-mail automático): `sequence`, com só o que muda (`sendAfter` com o intervalo inteiro depois do e-mail anterior; ou `sendAt` para uma data fixa; `startTime`/`endTime`; `weekdays`). Leia antes o agendamento atual (`settings.sequence` no `get_email`, ou o `get_emails`, que traz o `sequenceDay` de cada nível) e mostre ao cliente o antes e o depois em palavras, com o dia da sequência ("hoje sai 0 dias depois do anterior, no dia 0; passa a sair 3 dias depois, no dia 3"), e quantos contatos esperam no nível (`waitingLeads`): eles têm a data do próximo envio refeita. Mudar um intervalo muda o dia dos e-mails seguintes também: diga isso.
 3. Ativar ou pausar passa pela mesma confirmação do passo 5. Se o e-mail já está ativo e o conteúdo vai mudar, avise que a mudança vale para os próximos envios.
 4. Campanha já enviada (`EMAIL_ALREADY_SENT`) ou agendada (`EMAIL_SCHEDULED`) não pode ser editada: explique e não insista. Para corrigir uma campanha enviada, ofereça criar outra. Ativar ou pausar campanha é feito na tela Campanhas da LeadLovers.
-5. Horário, intervalo, filtros e posição não mudam por aqui; diga que isso é feito na LeadLovers.
+5. Filtros e posição não mudam por aqui; diga que isso é feito na LeadLovers. O agendamento de uma campanha também (`EMAIL_NOT_SEQUENCE`).
 
 ## Consultar campanhas
 
@@ -151,6 +156,8 @@ Traduza e dê o próximo passo; nunca crie outro e-mail no lugar de um recusado.
 | `EMAIL_BODY_REQUIRED` | E-mail sem conteúdo não pode ser ativado; escreva o conteúdo antes |
 | `EMAIL_CUSTOM_FIELD_NOT_SUPPORTED` | O conteúdo usa campo personalizado que o envio automático não preenche; ofereça tirar o campo ou salvar e incluí-lo no editor da LeadLovers |
 | `EMAIL_VARIANT_NOT_SUPPORTED` | O e-mail tem teste A/B ou reenvio e só pode ser editado no editor da LeadLovers |
+| `EMAIL_NOT_SEQUENCE` | Só e-mail automático tem intervalo; a data de uma campanha muda na LeadLovers. Nada foi gravado |
+| `EMAIL_SEND_WINDOW_INVALID` | A janela ficaria com o fim antes do início; pergunte o início e o fim juntos. Nada foi gravado |
 | `CONTENT_CHANGED` | Nada foi gravado: "O e-mail mudou desde que eu li; posso ler de novo antes de alterar?". Com o sim, leia de novo com `get_email`, refaça a mudança sobre o HTML novo e grave com o `hash` novo; nunca grave sem `baseHash` para forçar |
 | Sessão do design com IA expirada | O rascunho vale por 1 hora; ofereça criar o design de novo |
 | Conexão sem permissão de escrita | A conexão só permite consultar; reconecte a LeadLovers no assistente e aprove o acesso completo |
