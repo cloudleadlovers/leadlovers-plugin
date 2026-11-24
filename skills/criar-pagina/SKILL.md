@@ -50,6 +50,7 @@ Pergunte, uma coisa por vez e só o que faltar: o objetivo da página, a oferta 
   - cada seção é uma `<section>` (ou `<header>` e `<footer>`) filha direta do `<body>`, sem um contêiner em volta de todas;
   - `<head>` sem atributos, sempre escrito assim, porque a LeadLovers coloca o SEO e os scripts da página procurando esse texto exato; o idioma vai em `<html lang="pt-BR">`;
   - estilo num `<style>` dentro do `<head>`, fontes do Google por `<link>` e nenhum `<script>`;
+  - nenhum `<link rel="icon">` (nem `shortcut icon` ou `apple-touch-icon`): o ícone da aba é o do projeto, e a LeadLovers coloca em todas as páginas dele;
   - toda imagem com `alt` que descreve a imagem.
 - Imagens só quando o cliente pedir ou o tipo pedir (foto da oferta, capa do material), com `search_images`, usando a URL da imagem que a tool devolve.
 - Páginas de captura e de lançamento levam o formulário de captura padrão (veja "Formulário de captura padrão"). As demais só levam se o cliente pedir.
@@ -71,6 +72,8 @@ Resuma em uma linha e espere o "sim": "Vou criar a página de obrigado obrigado-
 Diga o que a tool confirmou: "Criei a página de captura curso-confeitaria no projeto Curso de Confeitaria. Quem preencher o formulário entra nesse projeto e vai para a página de obrigado." Mostre o endereço de cada página como a resposta trouxe (`url`). Se veio vazio, diga que o endereço aparece na tela de páginas do projeto na LeadLovers. Nunca monte um endereço por conta própria.
 
 Se a resposta trouxer o link do editor (`editorUrl`), ofereça: "Quer ajustar textos e imagens você mesmo? Abra no editor: <link>", com o link como veio. Sem ele, não fale do editor.
+
+Se o projeto ainda não tem ícone das páginas (`get_machine_details` traz `favicon` vazio), ofereça uma vez colocar o ícone da marca na aba do navegador, como em "Ícone das páginas" de `criar-projeto`: o ícone do site do cliente ou o logo, num endereço `https://` de PNG, JPG, WEBP, GIF ou ICO (nunca SVG), gravado com `set_machine_favicon` depois do "sim". Vale para todas as páginas do projeto, as antigas também. Se o cliente pedir para trocar o ícone das páginas, é o mesmo caminho, a qualquer momento.
 
 Ofereça o próximo passo: o e-mail de boas-vindas para quem se cadastrar (`criar-email`).
 
@@ -98,6 +101,7 @@ Só a pedido explícito do cliente. Confirme dizendo o efeito ("a página curso-
 - Título ou descrição recusados: tire `<`, `>` e aspas duplas, e respeite 255 caracteres no título e 1000 na descrição.
 - `PAGE_NOT_FOUND`: a página foi excluída ou não é desta conta; liste as páginas de novo com `get_pages`.
 - `CONTENT_CHANGED`: a página mudou desde a leitura e nada foi gravado; siga o item 6 de "Editar uma página".
+- Recusa do ícone (`FAVICON_UNSUPPORTED_TYPE`, `FAVICON_URL_NOT_ALLOWED`, `FAVICON_DOWNLOAD_FAILED`, `FAVICON_TOO_LARGE`, `FAVICON_CORRUPTED`): o projeto fica com o ícone que tinha; peça outra imagem (um SVG precisa virar PNG).
 - Conexão sem permissão de escrita: a conexão só permite consultar; reconecte a LeadLovers no assistente e aprove o acesso completo.
 - LeadLovers recusou a conexão (401): a conexão expirou ou foi revogada; reconecte a LeadLovers no assistente.
 - Qualquer outro erro: traduza em uma frase, diga o próximo passo e não tente de novo sem o cliente pedir.

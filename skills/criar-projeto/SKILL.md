@@ -61,6 +61,15 @@ Confirme em uma linha: "Vou criar o projeto de e-mail Curso de Confeitaria. Poss
 - `emailId` nulo num projeto de e-mail: o primeiro e-mail não pôde ser criado junto. O primeiro e-mail automático é então criado com `create_email` na "Sequência Inicial".
 - Resposta sem `sequenceId`: crie a sequência com `create_sequence`, nome "Sequência Inicial".
 - `NAME_EXISTS` em `create_machine`: já existe um projeto com esse nome. Ofereça usar o existente ou escolher outro nome; não repita a chamada com o mesmo nome.
+
+### Ícone das páginas
+
+- O ícone da aba do navegador é um por projeto e vale para todas as páginas dele (veja "Ícone das páginas" no glossário). Num projeto de e-mail, depois de criar o projeto, ofereça uma vez: "Quer que as páginas desse projeto mostrem o ícone da sua marca na aba do navegador?", com as opções: o ícone do site do cliente, o logo dele, ou deixar sem ícone por enquanto.
+- Precisa de um endereço `https://` de uma imagem PNG, JPG, WEBP, GIF ou ICO. Se o cliente tiver um site e você conseguir ler o site, prefira o ícone que ele declara para celular (`apple-touch-icon`) ou o maior PNG quadrado, e não o `favicon.ico`. Senão, peça o endereço da imagem do logo ou do ícone. Nunca invente um endereço.
+- Logo em SVG não serve: peça a versão em PNG.
+- Com o "sim", chame `set_machine_favicon` com o projeto e o endereço. A LeadLovers reduz para um ícone quadrado pequeno; diga isso se o logo for largo, porque ele aparece inteiro e bem pequeno.
+- Nunca coloque o ícone no HTML de uma página (`<link rel="icon">`): ele já sai do projeto para todas as páginas.
+- Recusas de `set_machine_favicon` (`FAVICON_UNSUPPORTED_TYPE`, `FAVICON_URL_NOT_ALLOWED`, `FAVICON_DOWNLOAD_FAILED`, `FAVICON_TOO_LARGE`, `FAVICON_CORRUPTED`): o projeto fica com o ícone que tinha. Explique em uma frase e peça outra imagem; não tente de novo com o mesmo endereço.
 <!-- /funil -->
 
 ## Sequência extra
@@ -83,6 +92,9 @@ Só então chame `create_sequence` com o projeto e o nome. Nome repetido no mesm
 Diga o que a tool confirmou:
 
 - E-mail: "Criei o projeto de e-mail Curso de Confeitaria. Ele já vem com a Sequência Inicial e um primeiro e-mail ainda vazio, guardado sem enviar."
-- Outros canais: "Criei o projeto de WhatsApp Atendimento. Ele já vem com a Sequência Inicial."
+- WhatsApp: "Criei o projeto de WhatsApp Atendimento. Ele já vem com a Sequência Inicial e uma primeira mensagem, salva sem enviar."
+- Outros canais: "Criei o projeto de SMS Avisos. Ele já vem com a Sequência Inicial."
 
-Termine oferecendo o próximo passo. Num projeto de e-mail: escrever o primeiro e-mail (`criar-email`) ou criar a página de captura do projeto (`criar-pagina`). Num projeto de outro canal, não ofereça página de captura nem e-mail: o formulário de captura padrão pede e-mail e o funil completo é montado por e-mail. Diga que a conexão do canal e as mensagens dele se configuram na LeadLovers.
+Num projeto de e-mail, ofereça o ícone das páginas (veja "Ícone das páginas") antes do próximo passo, e diga o que a tool confirmou: "Pronto: as páginas do projeto Curso de Confeitaria mostram o seu ícone na aba do navegador."
+
+Termine oferecendo o próximo passo. Num projeto de e-mail: escrever o primeiro e-mail (`criar-email`) ou criar a página de captura do projeto (`criar-pagina`). Num projeto de WhatsApp: escrever a primeira mensagem ou criar o link de WhatsApp para a página (`criar-mensagem-whatsapp`), e diga que o número de WhatsApp é conectado na LeadLovers. Num projeto de outro canal, não ofereça página de captura nem e-mail: o formulário de captura padrão pede e-mail e o funil completo é montado por e-mail. Diga que a conexão do canal e as mensagens dele se configuram na LeadLovers.
