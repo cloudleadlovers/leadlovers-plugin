@@ -36,6 +36,7 @@ No máximo 4 perguntas, uma por vez, pulando o que o cliente já disse:
 Antes de qualquer chamada de escrita, chame `get_machines` e apresente o plano em linguagem simples. O nome do projeto no plano não pode ser igual ao de um projeto que já existe, porque a LeadLovers recusa (veja "Criar o projeto" em `references/regras-de-criacao.md`):
 
 > **Projeto de e-mail:** E-book Receitas Fit
+> **Ícone das páginas:** o ícone do site ou o logo da marca, na aba do navegador (só se o cliente tiver um)
 > **Página de obrigado:** obrigado-receitas-fit, dizendo que o e-book chegou por e-mail
 > **Página de captura:** ebook-receitas-fit, com título, benefícios e o formulário de nome e e-mail; quem se cadastra vai para a página de obrigado
 > **E-mails automáticos (Sequência Inicial):**
@@ -52,6 +53,7 @@ Ajuste o plano até o cliente aprovar. Se ele escolher "ativos", mostre também 
 Siga `references/regras-de-criacao.md` em cada etapa. A ordem é fixa:
 
 1. **Projeto** de e-mail com `create_machine`. Guarde a "Sequência Inicial" (`sequenceId`) e o e-mail do nível 1 (`emailId`). Não crie sequência nem outro e-mail de nível 1.
+   Se o plano tem ícone das páginas, grave logo depois com `set_machine_favicon` (veja "Ícone das páginas" em `references/regras-de-criacao.md`). Uma recusa do ícone não para o funil: diga que o projeto ficou sem ícone e siga.
 2. **Página de obrigado** com `create_page` (tipo `next-steps`) no projeto criado. Guarde a `url` da resposta.
 3. **Página de captura** com `create_page` (tipo `capture`, com o formulário padrão) no mesmo projeto, com essa `url` em `nextUrl` e `existsUrl`, para quem se cadastrar ir para a página de obrigado.
 4. **Primeiro e-mail:** preencha o nível 1 com `update_email` (`id` do `emailId`, `subject`, `body` e `enabled` conforme a escolha do passo 2).
@@ -68,6 +70,9 @@ Liste o que foi criado e o estado de envio de cada e-mail, como a resposta das t
 > Criei o projeto E-book Receitas Fit com:
 > - a página de captura ebook-receitas-fit, no endereço <endereço>, que leva quem se cadastra à página de obrigado obrigado-receitas-fit;
 > - 3 e-mails automáticos na Sequência Inicial, salvos, sem enviar.
+> - o ícone da sua marca na aba do navegador de todas as páginas do projeto.
+
+Cite o ícone das páginas só quando `set_machine_favicon` confirmou.
 
 Mostre o endereço de cada página como a resposta trouxe (`url`); nunca monte um.
 
