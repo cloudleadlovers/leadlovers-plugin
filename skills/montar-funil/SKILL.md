@@ -15,6 +15,7 @@ Sair de um objetivo de negócio ("quero captar contatos para meu e-book") para u
 
 - O cliente quer só uma peça (um projeto, uma página, um e-mail): use `criar-projeto`, `criar-pagina` ou `criar-email`.
 - O cliente quer uma campanha para a base: use `criar-email`. Esta skill nunca cria campanha.
+- O cliente quer o acompanhamento em vários canais (e-mail, depois WhatsApp, depois SMS): use `criar-automacao`, que monta o fluxo e as entradas por página numa automação.
 
 ## Como falar com o cliente
 

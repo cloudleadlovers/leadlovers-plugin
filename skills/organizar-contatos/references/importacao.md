@@ -41,6 +41,8 @@ Pergunte se os contatos ficam só na conta ou entram também num projeto. No pro
 - só entrar no projeto, sem começar a sequência (`-1`, recomendado quando o cliente só quer segmentar);
 - depois do último e-mail (`end-of-funnel`): explique que, se a sequência tiver uma ação de final de funil, ela dispara para esses contatos.
 
+Numa automação (tipo 10) a sequência é a da automação e o nível é o de um passo publicado, que `get_automation` mostra em cada passo (os níveis pulam números); `end-of-funnel` é o fim da automação, onde ficam os que terminaram, e dispara o "Ao terminar a automação". Automação nunca publicada ainda não recebe contatos. Avise que os contatos vão receber as mensagens do fluxo, em todos os canais dele, e pule a leitura de e-mail abaixo.
+
 Leia com `get_emails` e `get_email` o e-mail da posição escolhida. Se ele estiver ativo, avise: "esses contatos vão começar a receber os e-mails automáticos da sequência".
 
 ## 5. Contatos que já estão na conta

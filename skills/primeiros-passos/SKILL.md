@@ -1,6 +1,6 @@
 ---
 name: primeiros-passos
-description: Apresenta a conta LeadLovers ao cliente em linguagem simples e leva ao próximo passo certo. Use no começo da conversa, quando o cliente perguntar o que dá para fazer, como funciona a LeadLovers ou por onde começar, ou quando trouxer um objetivo vago como vender um curso, captar contatos, divulgar um e-book ou fazer um funil. Mostra quantos projetos (máquinas) a conta tem, de que tipo, com quantas sequências e e-mails, explica só os termos que aparecem e oferece criar projeto, criar e-mail ou campanha, criar página de captura, organizar contatos ou montar um funil. Só consulta a conta, nunca cria nem altera nada.
+description: Apresenta a conta LeadLovers ao cliente em linguagem simples e leva ao próximo passo certo. Use no começo da conversa, quando o cliente perguntar o que dá para fazer, como funciona a LeadLovers ou por onde começar, ou quando trouxer um objetivo vago como vender um curso, captar contatos, divulgar um e-book ou fazer um funil. Mostra quantos projetos (máquinas) a conta tem, de que tipo, com quantas sequências e e-mails, explica só os termos que aparecem e oferece criar projeto, criar e-mail ou campanha, criar página de captura, organizar contatos, montar um funil ou criar uma automação que intercala e-mail, WhatsApp e SMS. Só consulta a conta, nunca cria nem altera nada.
 metadata:
   version: "1.0"
 ---
@@ -13,7 +13,7 @@ Dar ao cliente um raio-x curto da conta e encaminhá-lo para a ação que resolv
 
 ## Quando não usar
 
-- O cliente já pediu algo concreto: criar um projeto (`criar-projeto`), um e-mail ou campanha (`criar-email`), uma mensagem, um disparo ou o link de WhatsApp (`criar-mensagem-whatsapp`), uma página (`criar-pagina`), encontrar, importar, marcar ou mover contatos (`organizar-contatos`), ou pipelines, etapas e negociações do CRM (`organizar-crm`). Vá direto para a skill da tarefa.
+- O cliente já pediu algo concreto: criar um projeto (`criar-projeto`), um e-mail ou campanha (`criar-email`), uma mensagem, um disparo ou o link de WhatsApp (`criar-mensagem-whatsapp`), uma página (`criar-pagina`), encontrar, importar, marcar ou mover contatos (`organizar-contatos`), pipelines, etapas e negociações do CRM (`organizar-crm`), ou uma automação com mensagens em vários canais (`criar-automacao`). Vá direto para a skill da tarefa.
 - O cliente quer o funil inteiro pronto (projeto, página e e-mails): use `montar-funil` quando ela estiver disponível.
 
 ## Como falar com o cliente
@@ -31,6 +31,7 @@ Dar ao cliente um raio-x curto da conta e encaminhá-lo para a ação que resolv
    > Sua conta tem 4 projetos: 3 de e-mail e 1 de WhatsApp. O maior é "Curso de Confeitaria", com 2 sequências e 7 e-mails automáticos. "Lançamento Novembro" ainda não tem nenhum e-mail.
 
    Com mais de 5 projetos, cite os 3 com mais e-mails e diga quantos outros existem. Não liste ids nem todos os níveis, e não acrescente observações ou alertas sobre os outros projetos: se o cliente quiser detalhes, ele pede.
+   Projeto de tipo 10 é uma automação (veja o glossário): conte-o como automação, nunca como projeto de e-mail. Ele não tem sequências de e-mail para resumir.
 4. Explique só os termos que apareceram no resumo, numa frase cada (projeto, sequência, e-mail automático), usando o glossário.
 
 ## Passo 2, objetivo
@@ -44,6 +45,7 @@ Pergunte o que o cliente quer fazer agora, com estas opções:
 5. Montar um funil completo: projeto, página de captura e e-mails de boas-vindas.
 6. Criar mensagens de WhatsApp, um disparo ou o link de WhatsApp da página (num projeto de WhatsApp).
 7. Organizar o CRM: pipeline de vendas, etapas e negociações dos contatos.
+8. Criar uma automação: e-mail, WhatsApp, SMS, Instagram e ligação intercalados num fluxo, com esperas entre eles.
 
 Recomende uma pela situação:
 
@@ -52,10 +54,11 @@ Recomende uma pela situação:
 - Pedido sobre contatos que já existem, ou uma lista para importar: recomende a 4.
 - Pedido sobre WhatsApp, ou conta cujo projeto em uso é de WhatsApp: recomende a 6.
 - Pedido sobre CRM, pipeline ou acompanhar negociações por etapa: recomende a 7.
+- Pedido de mensagens em mais de um canal, régua de relacionamento ou follow-up ("um e-mail e depois um WhatsApp"): recomende a 8.
 
 ## Passo 3, encaminhar
 
-Siga a skill da opção escolhida: `criar-projeto`, `criar-email`, `criar-pagina`, `organizar-contatos`, `montar-funil`, `criar-mensagem-whatsapp` ou `organizar-crm`.
+Siga a skill da opção escolhida: `criar-projeto`, `criar-email`, `criar-pagina`, `organizar-contatos`, `montar-funil`, `criar-mensagem-whatsapp`, `organizar-crm` ou `criar-automacao`.
 
 Se `montar-funil` não estiver disponível no seu ambiente, monte o funil encadeando as outras, nesta ordem e com o cliente aprovando cada etapa: `criar-projeto` (tipo e-mail), `criar-pagina` (página de captura no projeto criado) e `criar-email` (e-mail automático de boas-vindas no nível 1 da "Sequência Inicial" do projeto, perguntando se ele fica ativo ou só salvo).
 
