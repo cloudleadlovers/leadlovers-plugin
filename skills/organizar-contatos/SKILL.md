@@ -55,6 +55,7 @@ Valem para marcar com tag (`add_tags_to_leads`), tirar tag (`remove_tags_from_le
 - `add_leads_to_machine` com o projeto, a sequência e a posição de entrada. Pergunte a posição: começar do primeiro e-mail (nível 1), de outra etapa, ou só entrar no projeto sem começar a sequência (posição -1, para segmentar sem disparar nada).
 - Antes de confirmar, leia com `get_emails` e `get_email` o e-mail da posição de entrada. Se ele estiver ativo, avise: "esses contatos vão começar a receber os e-mails automáticos da sequência".
 - Contatos que já estão no projeto, ou sem e-mail num projeto de e-mail, são ignorados; diga isso no resultado.
+- **Automação (tipo 10):** os contatos entram na sequência da automação e no nível de um passo publicado, que `get_automation` (com o projeto) mostra em cada passo; os níveis pulam números, então nunca use a posição do passo como nível. O primeiro passo é onde a automação começa. Automação nunca publicada ainda não recebe contatos: ofereça publicar antes (`criar-automacao`). Avise que eles começam a receber as mensagens do fluxo, em todos os canais dele.
 - `ACTIVE_COPY_BETWEEN_MACHINES`: uma mudança anterior para o mesmo projeto ainda está na fila; acompanhe a anterior até terminar e tente de novo.
 
 ## Tirar de projeto ou excluir

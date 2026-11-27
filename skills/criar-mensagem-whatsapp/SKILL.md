@@ -29,7 +29,7 @@ metadata:
 
 ## Passo 1, projeto
 
-1. Chame `get_machines` e fique só com os projetos de WhatsApp (tipo 5 no glossário). Deixe de fora os projetos de automação (`isAutomation: true`).
+1. Chame `get_machines` e fique só com os projetos de WhatsApp (tipo 5 no glossário). Deixe de fora os do editor de automação antigo (`isAutomation: true`). WhatsApp num fluxo com outros canais é uma automação (tipo 10): siga `criar-automacao`.
 2. Um só: confirme com o cliente. Vários: pergunte qual, pelo nome. Nenhum: explique que mensagens de WhatsApp moram num projeto de WhatsApp e ofereça criar um.
 
 ## Passo 2, número do projeto
